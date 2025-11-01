@@ -246,6 +246,40 @@ As the sun set, we captured these final moments...
 - Classic 2x2 grid works well
 - No specific layout requirements
 
+## Text Alignment Options
+
+Control how text content appears on your project pages by adding a CSS class to your content:
+
+```yaml
+---
+title: "Your Project"
+# ... other front matter
+---
+
+<!-- Default: centered text -->
+Your project description and content will be centered by default.
+
+<!-- For justified text, add the class in your markdown -->
+<div class="project-content text-justified">
+
+Long paragraphs work better with justified alignment. This spreads text evenly across the line width, creating clean edges on both sides. Perfect for detailed project descriptions, artist statements, or longer storytelling content.
+
+</div>
+
+<!-- For left-aligned text -->
+<div class="project-content text-left">
+
+Left alignment provides a more traditional reading experience.
+Good for technical details, lists, or casual descriptions.
+
+</div>
+```
+
+**Available text alignment options:**
+- **Default (centered)**: Clean, artistic look that matches the minimal design
+- **`text-justified`**: Even text distribution for longer paragraphs
+- **`text-left`**: Traditional left alignment for readability
+
 ## Adding Projects Manually
 
 If you prefer to add projects manually:
