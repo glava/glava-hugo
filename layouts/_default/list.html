@@ -7,12 +7,17 @@
         <article class="archive-preview">
             <h3><a href="{{ .Permalink }}">{{ .Title | upper }}</a></h3>
             <time>{{ .Date.Format "January 2, 2006" }}</time>
-            {{ if .Params.hero_image }}
+            {{ if .Params.gallery }}
+            {{ $firstImage := index .Params.gallery 0 }}
+            {{ $resource := .Resources.GetMatch $firstImage }}
+            {{ if $resource }}
+            {{ $preview := $resource.Resize "400x q80" }}
             <div class="preview-image">
                 <a href="{{ .Permalink }}">
-                    <img src="{{ .Params.hero_image }}" alt="{{ .Title }}" loading="lazy">
+                    <img src="{{ $preview.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
                 </a>
             </div>
+            {{ end }}
             {{ end }}
             {{ if .Summary }}
             <p>{{ .Summary }}</p>

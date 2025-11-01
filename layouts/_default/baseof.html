@@ -22,7 +22,13 @@
     {{ end }}
 
     <script>
-        function openLightbox(imageSrc) {
+        let currentImageIndex = 0;
+        let galleryImages = window.galleryImages || [];
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function openLightbox(imageSrc, index) {
+            currentImageIndex = index || 0;
             document.getElementById('lightbox').style.display = 'block';
             document.getElementById('lightbox-image').src = imageSrc;
         }
@@ -31,12 +37,65 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // Close lightbox with Escape key
+        function nextImage() {
+            if (galleryImages.length === 0) return;
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            document.getElementById('lightbox-image').src = galleryImages[currentImageIndex];
+        }
+
+        function prevImage() {
+            if (galleryImages.length === 0) return;
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            document.getElementById('lightbox-image').src = galleryImages[currentImageIndex];
+        }
+
+        // Keyboard navigation
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeLightbox();
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.style.display === 'block') {
+                switch(event.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        prevImage();
+                        break;
+                    case 'ArrowRight':
+                        nextImage();
+                        break;
+                }
             }
         });
+
+        // Touch/swipe support
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.addEventListener('touchstart', function(event) {
+                    touchStartX = event.changedTouches[0].screenX;
+                });
+
+                lightbox.addEventListener('touchend', function(event) {
+                    touchEndX = event.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+            }
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swiped left - next image
+                    nextImage();
+                } else {
+                    // Swiped right - previous image
+                    prevImage();
+                }
+            }
+        }
     </script>
 </body>
 </html>

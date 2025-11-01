@@ -29,22 +29,43 @@ pip install Pillow
 
 ### 2. Add New Photography Project
 
-Use the image processing script to add new projects:
+Use the Hugo-integrated image processing script:
 
 ```bash
-# Example: Process images from your photos directory
-python process_images.py "/Users/goran/Documents/Photos/2025/Oct" \
+# Process images from your source directory
+python3 process_images_hugo.py "./source" \
   --project-name "Day Out - Tegeler Forst" \
   --year 2024 \
-  --date 2024-10-15 \
-  --description "A day exploring the autumn landscapes of Tegeler Forst"
+  --description "Autumn forest photography"
 ```
 
 This will:
-- Resize and compress images for web
-- Create thumbnails
+- Copy images to Hugo page bundle structure
+- Fix EXIF rotation automatically
 - Generate Hugo markdown content file
-- Organize files in the correct directory structure
+- Let Hugo handle all image resizing and optimization
+
+### 2.1. Update/Replace Existing Project
+
+**Common workflow when you change your mind:**
+
+1. **Update source images**: Replace/add/remove photos in your `source/` directory
+2. **Re-run processing script**: Use the same command as above
+3. **Hugo auto-rebuilds**: Site updates automatically with new images
+
+```bash
+# Example: You changed one photo in source/ and want to republish
+python3 process_images_hugo.py "./source" \
+  --project-name "Day Out - Tegeler Forst" \
+  --year 2024 \
+  --description "Autumn forest photography"
+```
+
+**What happens:**
+- ✅ Overwrites existing project with updated images
+- ✅ Fixes EXIF rotation for any new/changed photos
+- ✅ Hugo automatically processes new image sizes
+- ✅ Live reload updates your browser instantly
 
 ### 3. Preview Locally
 
@@ -63,7 +84,7 @@ Visit `http://localhost:1313` to preview your site.
 ## Image Processing Script Usage
 
 ```bash
-python process_images.py <source_directory> --project-name "Project Name" [options]
+python3 process_images_hugo.py <source_directory> --project-name "Project Name" [options]
 
 Options:
   --year YEAR           Year for the project (default: current year)
@@ -75,13 +96,29 @@ Options:
 ### Example Usage
 
 ```bash
-# Process October 2025 photos
-python process_images.py "/Users/goran/Documents/Photos/2025/Oct" \
+# Process photos from source directory
+python3 process_images_hugo.py "./source" \
   --project-name "Autumn in Berlin" \
   --year 2025 \
-  --date 2025-10-31 \
   --description "Capturing autumn colors around Berlin"
 ```
+
+### Workflow for Managing Projects
+
+**Initial Setup:**
+1. Place your photos in `source/` directory
+2. Run the processing script
+3. Preview with `hugo server`
+
+**When You Want to Change Something:**
+1. **Replace photos**: Update files in `source/` directory
+2. **Re-run script**: Same command as initial setup
+3. **Auto-update**: Hugo live reload shows changes instantly
+
+**Multiple Projects:**
+- Each run creates/updates one project
+- Different project names create separate blog posts
+- Use descriptive project names for better organization
 
 ## Adding Projects Manually
 

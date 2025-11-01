@@ -1,0 +1,52 @@
+{{ define "main" }}
+<article class="project" id="top">
+    <header class="project-header">
+        <h1>{{ .Date.Format "2006" }} / {{ .Title | upper }}</h1>
+        {{ if .Params.description }}
+        <p class="description">{{ .Params.description }}</p>
+        {{ end }}
+    </header>
+
+    {{ if .Params.gallery }}
+    <div class="gallery">
+        {{ range $index, $image := .Params.gallery }}
+        {{ $resource := $.Resources.GetMatch $image }}
+        {{ if $resource }}
+        {{ $thumb := $resource.Resize "400x q80" }}
+        {{ $large := $resource.Resize "1200x q85" }}
+        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+    {{ end }}
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-nav lightbox-nav-prev" onclick="event.stopPropagation(); prevImage()">‹</div>
+        <div class="lightbox-nav lightbox-nav-next" onclick="event.stopPropagation(); nextImage()">›</div>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightbox-image" src="" alt="">
+        </div>
+    </div>
+
+    <div class="project-content">
+        {{ .Content }}
+    </div>
+
+    <!-- Gallery data for JavaScript -->
+    <script>
+        window.galleryImages = [
+            {{ range .Params.gallery }}
+            {{ $resource := $.Resources.GetMatch . }}
+            {{ if $resource }}
+            {{ $large := $resource.Resize "1200x q85" }}
+            "{{ $large.RelPermalink }}",
+            {{ end }}
+            {{ end }}
+        ];
+    </script>
+</article>
+{{ end }}
