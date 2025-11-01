@@ -14,10 +14,9 @@
         {{ $firstImage := index .Params.gallery 0 }}
         {{ $resource := .Resources.GetMatch $firstImage }}
         {{ if $resource }}
-        {{ $thumb := $resource.Resize "400x q80" }}
-        {{ $large := $resource.Resize "1200x q85" }}
+        {{ $large := $resource.Resize "1200x q95" }}
         <div class="gallery-item wide" onclick="openLightbox('{{ $large.RelPermalink }}', 0)">
-            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
         </div>
         {{ end }}
         <div class="small-column">
@@ -25,10 +24,9 @@
           {{ if gt $index 0 }}
           {{ $resource := $.Resources.GetMatch $image }}
           {{ if $resource }}
-          {{ $thumb := $resource.Resize "400x q80" }}
-          {{ $large := $resource.Resize "1200x q85" }}
+          {{ $large := $resource.Resize "1200x q95" }}
           <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
-              <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+              <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
           </div>
           {{ end }}
           {{ end }}
@@ -40,8 +38,7 @@
         {{ range $index, $image := .Params.gallery }}
         {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
-        {{ $thumb := $resource.Resize "400x q80" }}
-        {{ $large := $resource.Resize "1200x q85" }}
+        {{ $large := $resource.Resize "1200x q95" }}
         {{ $itemClass := "gallery-item" }}
         {{ if eq $galleryClass "gallery-compact" }}
           {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
@@ -51,7 +48,7 @@
           {{ if eq $index 4 }}{{ $itemClass = "gallery-item small-4" }}{{ end }}
         {{ end }}
         <div class="{{ $itemClass }}" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
-            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
         </div>
         {{ end }}
         {{ end }}
@@ -65,8 +62,7 @@
         {{ range $index, $image := .Params.gallery2 }}
         {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
-        {{ $thumb := $resource.Resize "400x q80" }}
-        {{ $large := $resource.Resize "1200x q85" }}
+        {{ $large := $resource.Resize "1200x q95" }}
         {{ $itemClass := "gallery-item" }}
         {{ if eq $gallery2Class "gallery-mixed" }}
           {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
@@ -82,7 +78,7 @@
           {{ if eq $index 4 }}{{ $itemClass = "gallery-item small-4" }}{{ end }}
         {{ end }}
         <div class="{{ $itemClass }}" onclick="openLightbox('{{ $large.RelPermalink }}', {{ add $index (len $.Params.gallery) }})">
-            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
         </div>
         {{ end }}
         {{ end }}
@@ -95,8 +91,7 @@
         {{ range $index, $image := .Params.gallery3 }}
         {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
-        {{ $thumb := $resource.Resize "400x q80" }}
-        {{ $large := $resource.Resize "1200x q85" }}
+        {{ $large := $resource.Resize "1200x q95" }}
         {{ $itemClass := "gallery-item" }}
         {{ if eq $gallery3Class "gallery-mixed" }}
           {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
@@ -112,7 +107,7 @@
           {{ if eq $index 4 }}{{ $itemClass = "gallery-item small-4" }}{{ end }}
         {{ end }}
         <div class="{{ $itemClass }}" onclick="openLightbox('{{ $large.RelPermalink }}', {{ add $index (add (len $.Params.gallery) (len $.Params.gallery2)) }})">
-            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
         </div>
         {{ end }}
         {{ end }}
