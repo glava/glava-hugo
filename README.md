@@ -303,11 +303,50 @@ Project content goes here.
 
 3. Add your processed images to `static/images/YEAR/project-slug/`
 
-## GitHub Pages Setup
+## GitHub Pages Setup & Deployment
 
-1. Go to your repository Settings > Pages
-2. Set Source to "GitHub Actions"
-3. The workflow will automatically deploy on every push to `main`
+### Initial Setup
+
+1. **Repository Settings**:
+   - Go to your GitHub repository
+   - Navigate to **Settings** → **Pages**
+   - Under "Source", select **"GitHub Actions"**
+   - Save the settings
+
+2. **Domain Configuration** (if using custom domain):
+   - In the same Pages settings, add your custom domain
+   - Create a `CNAME` file in your repository root with your domain
+
+### Automatic Deployment
+
+The site deploys automatically via GitHub Actions:
+
+- **Triggers**: Every push to `master` or `main` branch
+- **Process**: 
+  1. Hugo builds the site with image processing
+  2. All images are optimized during build
+  3. Static site deployed to GitHub Pages
+- **URL**: Your site will be available at:
+  - `https://yourusername.github.io/repository-name/` (default)
+  - `https://yourdomain.com` (if custom domain configured)
+
+### Manual Deployment
+
+You can also trigger deployment manually:
+1. Go to **Actions** tab in your repository
+2. Select "Deploy Hugo site to GitHub Pages"
+3. Click "Run workflow"
+
+### Build Process
+
+The GitHub Actions workflow:
+- ✅ Installs Hugo Extended (required for image processing)
+- ✅ Processes all images at build time (1200px q95 quality)
+- ✅ Minifies CSS and HTML
+- ✅ Generates optimized static site
+- ✅ Deploys to GitHub Pages
+
+**No additional server-side processing needed!** All image optimization happens during the build.
 
 ## Customization
 
