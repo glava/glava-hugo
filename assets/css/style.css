@@ -93,14 +93,14 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* Gallery layout variations */
 .gallery-mixed {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     align-items: stretch;
 }
 
@@ -139,7 +139,7 @@ body {
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     aspect-ratio: 4/2;
 }
 
@@ -173,7 +173,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* Single wide image */
@@ -181,7 +181,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .gallery-item {
