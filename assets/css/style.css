@@ -108,6 +108,10 @@ body {
 /* Text alignment options */
 .project-content {
     text-align: center;
+    line-height: 1.7;
+    font-size: 17px;
+    max-width: 650px;
+    margin: 2rem 0;
 }
 
 .project-content.text-justified {
@@ -116,6 +120,19 @@ body {
 
 .project-content.text-left {
     text-align: left;
+}
+
+.project-content h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 3rem 0 1.5rem 0;
+    letter-spacing: -0.02em;
+    color: #222;
+}
+
+.project-content p {
+    margin-bottom: 1.5rem;
+    color: #444;
 }
 
 /* Gallery */

@@ -56,6 +56,32 @@
     {{ end }}
     {{ end }}
 
+    <div class="project-content text-left">
+        {{ if .Params.content_part1 }}
+            {{ .Params.content_part1 | markdownify }}
+        {{ else }}
+            {{ .Content }}
+        {{ end }}
+    </div>
+
+    {{ if .Params.single_image }}
+    {{ $resource := .Resources.GetMatch .Params.single_image }}
+    {{ if $resource }}
+    {{ $large := $resource.Resize "1200x q95" }}
+    <div class="gallery-single">
+        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ len .Params.gallery }})">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ if .Params.content_part2 }}
+    <div class="project-content text-left">
+        {{ .Params.content_part2 | markdownify }}
+    </div>
+    {{ end }}
+
     {{ if .Params.gallery2 }}
     {{ $gallery2Class := .Params.gallery2_layout | default "gallery" }}
     <div class="{{ $gallery2Class }}">
@@ -124,31 +150,34 @@
         </div>
     </div>
 
-    <div class="project-content">
-        {{ .Content }}
-    </div>
-
     <!-- Gallery data for JavaScript -->
     <script>
         window.galleryImages = [
             {{ range .Params.gallery }}
             {{ $resource := $.Resources.GetMatch . }}
             {{ if $resource }}
-            {{ $large := $resource.Resize "1200x q85" }}
+            {{ $large := $resource.Resize "1200x q95" }}
+            "{{ $large.RelPermalink }}",
+            {{ end }}
+            {{ end }}
+            {{ if .Params.single_image }}
+            {{ $resource := $.Resources.GetMatch .Params.single_image }}
+            {{ if $resource }}
+            {{ $large := $resource.Resize "1200x q95" }}
             "{{ $large.RelPermalink }}",
             {{ end }}
             {{ end }}
             {{ range .Params.gallery2 }}
             {{ $resource := $.Resources.GetMatch . }}
             {{ if $resource }}
-            {{ $large := $resource.Resize "1200x q85" }}
+            {{ $large := $resource.Resize "1200x q95" }}
             "{{ $large.RelPermalink }}",
             {{ end }}
             {{ end }}
             {{ range .Params.gallery3 }}
             {{ $resource := $.Resources.GetMatch . }}
             {{ if $resource }}
-            {{ $large := $resource.Resize "1200x q85" }}
+            {{ $large := $resource.Resize "1200x q95" }}
             "{{ $large.RelPermalink }}",
             {{ end }}
             {{ end }}
