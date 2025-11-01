@@ -1,0 +1,34 @@
+baseURL = "https://yourdomain.com"
+languageCode = "en-us"
+title = "goran / glava"
+
+[params]
+  description = "Photography Portfolio"
+  author = "Goran"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[permalinks]
+  posts = "/:year/:slug/"
+
+[menu]
+  [[menu.main]]
+    name = "Archive"
+    url = "/"
+    weight = 1
+
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+
+[imaging]
+  quality = 80
+  resampleFilter = "lanczos"
+  anchor = "center"
+
+[params.social]
+  email = ""
+  instagram = ""

@@ -1,0 +1,17 @@
+<aside class="sidebar">
+    <header>
+        <h1><a href="/">{{ .Site.Title }}</a></h1>
+    </header>
+    
+    <nav class="archive">
+        {{ range .Site.RegularPages.GroupByDate "2006" }}
+        <div class="year-group">
+            {{ range .Pages }}
+            <div class="archive-item">
+                <a href="{{ .Permalink }}">{{ .Date.Format "2006" }} / {{ .Title | upper }}</a>
+            </div>
+            {{ end }}
+        </div>
+        {{ end }}
+    </nav>
+</aside>

@@ -1,0 +1,40 @@
+# Hugo build files
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Node modules
+node_modules/
+npm-debug.log*
+
+# Local environment
+.env
+.env.local
+
+# Original large images (keep only processed versions)
+/original_photos/
+*.CR2
+*.NEF
+*.ARW
+*.DNG
+
+# Temporary files
+tmp/
+temp/

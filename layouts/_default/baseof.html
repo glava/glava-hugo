@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.Description }}">
+    {{ $style := resources.Get "css/style.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+</head>
+<body>
+    <div class="container">
+        {{ partial "sidebar.html" . }}
+        <main class="content">
+            {{ block "main" . }}{{ end }}
+        </main>
+    </div>
+    {{ if not .IsHome }}
+    <footer>
+        <a href="#top">↑ back to Top</a>
+    </footer>
+    {{ end }}
+
+    <script>
+        function openLightbox(imageSrc) {
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-image').src = imageSrc;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
