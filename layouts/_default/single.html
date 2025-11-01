@@ -8,13 +8,110 @@
     </header>
 
     {{ if .Params.gallery }}
-    <div class="gallery">
+    {{ $galleryClass := .Params.gallery_layout | default "gallery" }}
+    {{ if eq $galleryClass "gallery-mixed" }}
+      <div class="gallery-mixed">
+        {{ $firstImage := index .Params.gallery 0 }}
+        {{ $resource := .Resources.GetMatch $firstImage }}
+        {{ if $resource }}
+        {{ $thumb := $resource.Resize "400x q80" }}
+        {{ $large := $resource.Resize "1200x q85" }}
+        <div class="gallery-item wide" onclick="openLightbox('{{ $large.RelPermalink }}', 0)">
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        <div class="small-column">
+          {{ range $index, $image := .Params.gallery }}
+          {{ if gt $index 0 }}
+          {{ $resource := $.Resources.GetMatch $image }}
+          {{ if $resource }}
+          {{ $thumb := $resource.Resize "400x q80" }}
+          {{ $large := $resource.Resize "1200x q85" }}
+          <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
+              <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+          </div>
+          {{ end }}
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    {{ else }}
+    <div class="{{ $galleryClass }}">
         {{ range $index, $image := .Params.gallery }}
         {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
         {{ $thumb := $resource.Resize "400x q80" }}
         {{ $large := $resource.Resize "1200x q85" }}
-        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
+        {{ $itemClass := "gallery-item" }}
+        {{ if eq $galleryClass "gallery-compact" }}
+          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
+          {{ if eq $index 1 }}{{ $itemClass = "gallery-item small-1" }}{{ end }}
+          {{ if eq $index 2 }}{{ $itemClass = "gallery-item small-2" }}{{ end }}
+          {{ if eq $index 3 }}{{ $itemClass = "gallery-item small-3" }}{{ end }}
+          {{ if eq $index 4 }}{{ $itemClass = "gallery-item small-4" }}{{ end }}
+        {{ end }}
+        <div class="{{ $itemClass }}" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ if .Params.gallery2 }}
+    {{ $gallery2Class := .Params.gallery2_layout | default "gallery" }}
+    <div class="{{ $gallery2Class }}">
+        {{ range $index, $image := .Params.gallery2 }}
+        {{ $resource := $.Resources.GetMatch $image }}
+        {{ if $resource }}
+        {{ $thumb := $resource.Resize "400x q80" }}
+        {{ $large := $resource.Resize "1200x q85" }}
+        {{ $itemClass := "gallery-item" }}
+        {{ if eq $gallery2Class "gallery-mixed" }}
+          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
+          {{ if eq $index 1 }}{{ $itemClass = "gallery-item tall-1" }}{{ end }}
+          {{ if eq $index 2 }}{{ $itemClass = "gallery-item tall-2" }}{{ end }}
+          {{ if eq $index 3 }}{{ $itemClass = "gallery-item tall-3" }}{{ end }}
+          {{ if eq $index 4 }}{{ $itemClass = "gallery-item tall-4" }}{{ end }}
+        {{ else if eq $gallery2Class "gallery-compact" }}
+          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
+          {{ if eq $index 1 }}{{ $itemClass = "gallery-item small-1" }}{{ end }}
+          {{ if eq $index 2 }}{{ $itemClass = "gallery-item small-2" }}{{ end }}
+          {{ if eq $index 3 }}{{ $itemClass = "gallery-item small-3" }}{{ end }}
+          {{ if eq $index 4 }}{{ $itemClass = "gallery-item small-4" }}{{ end }}
+        {{ end }}
+        <div class="{{ $itemClass }}" onclick="openLightbox('{{ $large.RelPermalink }}', {{ add $index (len $.Params.gallery) }})">
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+    {{ end }}
+
+    {{ if .Params.gallery3 }}
+    {{ $gallery3Class := .Params.gallery3_layout | default "gallery" }}
+    <div class="{{ $gallery3Class }}">
+        {{ range $index, $image := .Params.gallery3 }}
+        {{ $resource := $.Resources.GetMatch $image }}
+        {{ if $resource }}
+        {{ $thumb := $resource.Resize "400x q80" }}
+        {{ $large := $resource.Resize "1200x q85" }}
+        {{ $itemClass := "gallery-item" }}
+        {{ if eq $gallery3Class "gallery-mixed" }}
+          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
+          {{ if eq $index 1 }}{{ $itemClass = "gallery-item tall-1" }}{{ end }}
+          {{ if eq $index 2 }}{{ $itemClass = "gallery-item tall-2" }}{{ end }}
+          {{ if eq $index 3 }}{{ $itemClass = "gallery-item tall-3" }}{{ end }}
+          {{ if eq $index 4 }}{{ $itemClass = "gallery-item tall-4" }}{{ end }}
+        {{ else if eq $gallery3Class "gallery-compact" }}
+          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
+          {{ if eq $index 1 }}{{ $itemClass = "gallery-item small-1" }}{{ end }}
+          {{ if eq $index 2 }}{{ $itemClass = "gallery-item small-2" }}{{ end }}
+          {{ if eq $index 3 }}{{ $itemClass = "gallery-item small-3" }}{{ end }}
+          {{ if eq $index 4 }}{{ $itemClass = "gallery-item small-4" }}{{ end }}
+        {{ end }}
+        <div class="{{ $itemClass }}" onclick="openLightbox('{{ $large.RelPermalink }}', {{ add $index (add (len $.Params.gallery) (len $.Params.gallery2)) }})">
             <img src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
         </div>
         {{ end }}
@@ -40,6 +137,20 @@
     <script>
         window.galleryImages = [
             {{ range .Params.gallery }}
+            {{ $resource := $.Resources.GetMatch . }}
+            {{ if $resource }}
+            {{ $large := $resource.Resize "1200x q85" }}
+            "{{ $large.RelPermalink }}",
+            {{ end }}
+            {{ end }}
+            {{ range .Params.gallery2 }}
+            {{ $resource := $.Resources.GetMatch . }}
+            {{ if $resource }}
+            {{ $large := $resource.Resize "1200x q85" }}
+            "{{ $large.RelPermalink }}",
+            {{ end }}
+            {{ end }}
+            {{ range .Params.gallery3 }}
             {{ $resource := $.Resources.GetMatch . }}
             {{ if $resource }}
             {{ $large := $resource.Resize "1200x q85" }}

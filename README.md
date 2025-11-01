@@ -120,6 +120,132 @@ python3 process_images_hugo.py "./source" \
 - Different project names create separate blog posts
 - Use descriptive project names for better organization
 
+## Gallery Layout Options
+
+Your portfolio supports multiple flexible gallery layouts for different storytelling needs:
+
+### Single Gallery Layouts
+
+Add `gallery_layout` to your front matter to control the layout:
+
+```yaml
+---
+title: "Your Project"
+gallery_layout: "gallery-mixed"  # Choose layout type
+gallery:
+  - "gallery-01.JPG"
+  - "gallery-02.JPG"
+  - "gallery-03.JPG"
+---
+```
+
+**Available layouts:**
+
+1. **`gallery` (default)** - 2x2 grid:
+   ```
+   [ img ] [ img ]
+   [ img ] [ img ]
+   ```
+
+2. **`gallery-mixed`** - 1 large + smaller images:
+   ```
+   [   LARGE    ] [ small ]
+   [   IMAGE    ] [ small ]
+   [            ] [ small ]
+   ```
+   - Perfect for hero shot + supporting images
+   - No wasted space, flexible height
+
+3. **`gallery-three`** - 3 equal columns:
+   ```
+   [ img ] [ img ] [ img ]
+   [ img ] [ img ] [ img ]
+   ```
+
+4. **`gallery-compact`** - Wide format with small images:
+   ```
+   [     LARGE      ] [ sm ] [ sm ]
+   [     IMAGE      ] [ sm ] [ sm ]
+   ```
+
+5. **`gallery-single`** - Full width images:
+   ```
+   [    FULL WIDTH IMAGE    ]
+   [    FULL WIDTH IMAGE    ]
+   ```
+
+### Multiple Galleries on One Page
+
+Create rich storytelling by mixing galleries with text:
+
+```yaml
+---
+title: "Day Out - Tegeler Forst"
+gallery_layout: "gallery-mixed"
+gallery:
+  - "gallery-01.JPG"
+  - "gallery-02.JPG"
+  - "gallery-03.JPG"
+gallery2_layout: "gallery-three"
+gallery2:
+  - "gallery-04.JPG"
+  - "gallery-05.JPG"
+  - "gallery-06.JPG"
+gallery3_layout: "gallery-single"
+gallery3:
+  - "gallery-07.JPG"
+---
+
+## Morning Walk
+First part of our day exploring the forest...
+
+<!-- First gallery appears here -->
+
+## Afternoon Discovery
+Later we found this amazing spot...
+
+<!-- Second gallery appears here -->
+
+## Evening Light
+As the sun set, we captured these final moments...
+
+<!-- Third gallery appears here -->
+```
+
+**Features:**
+- ✅ **Up to 3 galleries** per page (`gallery`, `gallery2`, `gallery3`)
+- ✅ **Different layouts** for each gallery
+- ✅ **Text between galleries** for storytelling
+- ✅ **Continuous lightbox** navigation across all images
+- ✅ **Flexible ordering** and combinations
+
+### Layout Selection Guide
+
+**Use `gallery-mixed` when:**
+- You have one standout hero image
+- Want to emphasize one photo over others
+- Need efficient space usage
+
+**Use `gallery-three` when:**
+- All images have equal importance
+- Want clean, organized presentation
+- Have 3, 6, 9+ images
+
+**Use `gallery-compact` when:**
+- You have landscape-oriented hero image
+- Want more horizontal emphasis
+- Need to fit many small images
+
+**Use `gallery-single` when:**
+- Images deserve full attention
+- Creating dramatic impact
+- Showing detailed work
+
+**Use `gallery` (default) when:**
+- Simple, balanced presentation
+- Classic 2x2 grid works well
+- No specific layout requirements
+
 ## Adding Projects Manually
 
 If you prefer to add projects manually:
