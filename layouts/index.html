@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="archive-list">
     <div class="posts-list">
-        {{ range .Pages }}
+        {{ range .Site.RegularPages }}
         <div class="post-item">
             <a href="{{ .Permalink }}">{{ .Date.Format "2006" }} / {{ .Title | upper }}</a>
         </div>

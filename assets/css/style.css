@@ -364,56 +364,44 @@ body {
 
 /* Archive List */
 .archive-list {
-    max-width: 600px;
+    max-width: 800px;
+    padding: 2rem 0;
 }
 
 .year-section {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .year-section h2 {
-    font-size: 1.125rem;
-    font-weight: normal;
-    margin-bottom: 1rem;
-    color: #666;
-}
-
-.archive-preview {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
-}
-
-.archive-preview:last-child {
-    border-bottom: none;
-}
-
-.archive-preview h3 {
-    font-size: 1rem;
-    font-weight: normal;
-    margin-bottom: 0.5rem;
-}
-
-.archive-preview h3 a {
-    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
     color: #333;
+    letter-spacing: -0.02em;
 }
 
-.archive-preview time {
-    font-size: 0.875rem;
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.post-item {
+    padding: 0;
+}
+
+.post-item a {
+    text-decoration: none;
     color: #666;
+    font-size: 1rem;
     display: block;
-    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+    letter-spacing: 0.02em;
 }
 
-.preview-image {
-    margin-bottom: 1rem;
-}
-
-.preview-image img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
+.post-item a:hover {
+    color: #333;
 }
 
 /* Footer */
