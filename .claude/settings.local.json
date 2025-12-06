@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/Users/goran/Desktop/**)",
+      "Bash(chmod:*)",
+      "Bash(hugo:*)",
+      "Bash(python3:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:goran.kisobran.org)",
+      "Bash(dig:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

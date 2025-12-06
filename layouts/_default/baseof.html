@@ -27,6 +27,49 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', function() {
+                    menuToggle.classList.toggle('active');
+                    sidebar.classList.toggle('active');
+                });
+
+                // Close menu when clicking on a link
+                const sidebarLinks = sidebar.querySelectorAll('a');
+                sidebarLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        menuToggle.classList.remove('active');
+                        sidebar.classList.remove('active');
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                        menuToggle.classList.remove('active');
+                        sidebar.classList.remove('active');
+                    }
+                });
+            }
+
+            // Touch/swipe support for lightbox
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.addEventListener('touchstart', function(event) {
+                    touchStartX = event.changedTouches[0].screenX;
+                });
+
+                lightbox.addEventListener('touchend', function(event) {
+                    touchEndX = event.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+            }
+        });
+
         function openLightbox(imageSrc, index) {
             currentImageIndex = index || 0;
             document.getElementById('lightbox').style.display = 'block';
@@ -64,21 +107,6 @@
                         nextImage();
                         break;
                 }
-            }
-        });
-
-        // Touch/swipe support
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox) {
-                lightbox.addEventListener('touchstart', function(event) {
-                    touchStartX = event.changedTouches[0].screenX;
-                });
-
-                lightbox.addEventListener('touchend', function(event) {
-                    touchEndX = event.changedTouches[0].screenX;
-                    handleSwipe();
-                });
             }
         });
 
