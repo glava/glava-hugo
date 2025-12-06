@@ -1,5 +1,5 @@
 ---
-title: "Vidimo se stura i danas"
+title: "Vidimo se sutra i danas"
 date: 2024-10-31T12:00:00Z
 description: "I watched a movie about analog photography, so I decided to shoot digital"
 gallery_layout: "gallery-single"
