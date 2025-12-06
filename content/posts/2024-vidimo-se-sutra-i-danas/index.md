@@ -27,5 +27,7 @@ content_part1: |
   During a worrying time in the hospital with a broken orbital bone, concerned about potentially losing my left eye, NK recommended a documentary called "Grain" to me. The film explores why shooting on film is considered superior to other mediums. Ironically, after watching it, I made a firm commitment to shoot digitally for an entire year. This resulted in a B&W series documenting my life in Berlin, combining still life, street photography, and portraiture.
 
 content_part2: |
-  I wasn't trying to be contrarian, but the arguments presented in the movie didn't resonate with me. Additionally, I felt that the ever-increasing price of film stock makes shooting film a barrier to entry in photography, especially when admired figures claim it's the only way to shoot. To introduce an element of surprise into my photos, I used a manual lens. I also started publishing weekly to avoid having to triage hundreds of images at once. Everything was shot on Fuji XE-3 and 7artisans 25mm f1.8.
+  I wasn't trying to be contrarian, but the arguments presented in the movie didn't resonate with me. Additionally, I felt that the ever-increasing price of film stock makes shooting film a barrier to entry in photography, especially when admired figures claim it's the only way to shoot. To introduce an element of surprise into my photos, I used a manual lens. I also started publishing weekly to avoid having to triage hundreds of images at once. Everything was shot on Fuji XE-3 and 7artisans 25mm f1.8. 
+  
+  The whole project is named after something my son says to me every time I leave the house: ‘See you tomorrow and today!’
 ---
