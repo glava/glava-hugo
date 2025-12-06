@@ -11,27 +11,15 @@
     {{ $galleryClass := .Params.gallery_layout | default "gallery" }}
     {{ if eq $galleryClass "gallery-mixed" }}
       <div class="gallery-mixed">
-        {{ $firstImage := index .Params.gallery 0 }}
-        {{ $resource := .Resources.GetMatch $firstImage }}
+        {{ range $index, $image := .Params.gallery }}
+        {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
         {{ $large := $resource.Resize "1200x q95" }}
-        <div class="gallery-item wide" onclick="openLightbox('{{ $large.RelPermalink }}', 0)">
+        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
             <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
         </div>
         {{ end }}
-        <div class="small-column">
-          {{ range $index, $image := .Params.gallery }}
-          {{ if gt $index 0 }}
-          {{ $resource := $.Resources.GetMatch $image }}
-          {{ if $resource }}
-          {{ $large := $resource.Resize "1200x q95" }}
-          <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ $index }})">
-              <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
-          </div>
-          {{ end }}
-          {{ end }}
-          {{ end }}
-        </div>
+        {{ end }}
       </div>
     {{ else }}
     <div class="{{ $galleryClass }}">
@@ -56,47 +44,34 @@
     {{ end }}
     {{ end }}
 
+    {{ if .Params.content_part1 }}
     <div class="project-content text-left">
-        {{ if .Params.content_part1 }}
-            {{ .Params.content_part1 | markdownify }}
-        {{ else }}
-            {{ .Content }}
-        {{ end }}
-    </div>
-
-    {{ if .Params.single_image }}
-    {{ $resource := .Resources.GetMatch .Params.single_image }}
-    {{ if $resource }}
-    {{ $large := $resource.Resize "1200x q95" }}
-    <div class="gallery-single">
-        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ len .Params.gallery }})">
-            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
-        </div>
-    </div>
-    {{ end }}
-    {{ end }}
-
-    {{ if .Params.content_part2 }}
-    <div class="project-content text-left">
-        {{ .Params.content_part2 | markdownify }}
+        {{ .Params.content_part1 | markdownify }}
     </div>
     {{ end }}
 
     {{ if .Params.gallery2 }}
     {{ $gallery2Class := .Params.gallery2_layout | default "gallery" }}
+    {{ if eq $gallery2Class "gallery-mixed" }}
+      <div class="gallery-mixed">
+        {{ range $index, $image := .Params.gallery2 }}
+        {{ $resource := $.Resources.GetMatch $image }}
+        {{ if $resource }}
+        {{ $large := $resource.Resize "1200x q95" }}
+        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ add $index (len $.Params.gallery) }})">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        {{ end }}
+      </div>
+    {{ else }}
     <div class="{{ $gallery2Class }}">
         {{ range $index, $image := .Params.gallery2 }}
         {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
         {{ $large := $resource.Resize "1200x q95" }}
         {{ $itemClass := "gallery-item" }}
-        {{ if eq $gallery2Class "gallery-mixed" }}
-          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
-          {{ if eq $index 1 }}{{ $itemClass = "gallery-item tall-1" }}{{ end }}
-          {{ if eq $index 2 }}{{ $itemClass = "gallery-item tall-2" }}{{ end }}
-          {{ if eq $index 3 }}{{ $itemClass = "gallery-item tall-3" }}{{ end }}
-          {{ if eq $index 4 }}{{ $itemClass = "gallery-item tall-4" }}{{ end }}
-        {{ else if eq $gallery2Class "gallery-compact" }}
+        {{ if eq $gallery2Class "gallery-compact" }}
           {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
           {{ if eq $index 1 }}{{ $itemClass = "gallery-item small-1" }}{{ end }}
           {{ if eq $index 2 }}{{ $itemClass = "gallery-item small-2" }}{{ end }}
@@ -110,22 +85,36 @@
         {{ end }}
     </div>
     {{ end }}
+    {{ end }}
+
+    {{ if .Params.content_part2 }}
+    <div class="project-content text-left">
+        {{ .Params.content_part2 | markdownify }}
+    </div>
+    {{ end }}
 
     {{ if .Params.gallery3 }}
     {{ $gallery3Class := .Params.gallery3_layout | default "gallery" }}
+    {{ if eq $gallery3Class "gallery-mixed" }}
+      <div class="gallery-mixed">
+        {{ range $index, $image := .Params.gallery3 }}
+        {{ $resource := $.Resources.GetMatch $image }}
+        {{ if $resource }}
+        {{ $large := $resource.Resize "1200x q95" }}
+        <div class="gallery-item" onclick="openLightbox('{{ $large.RelPermalink }}', {{ add $index (add (len $.Params.gallery) (len $.Params.gallery2)) }})">
+            <img src="{{ $large.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        {{ end }}
+      </div>
+    {{ else }}
     <div class="{{ $gallery3Class }}">
         {{ range $index, $image := .Params.gallery3 }}
         {{ $resource := $.Resources.GetMatch $image }}
         {{ if $resource }}
         {{ $large := $resource.Resize "1200x q95" }}
         {{ $itemClass := "gallery-item" }}
-        {{ if eq $gallery3Class "gallery-mixed" }}
-          {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
-          {{ if eq $index 1 }}{{ $itemClass = "gallery-item tall-1" }}{{ end }}
-          {{ if eq $index 2 }}{{ $itemClass = "gallery-item tall-2" }}{{ end }}
-          {{ if eq $index 3 }}{{ $itemClass = "gallery-item tall-3" }}{{ end }}
-          {{ if eq $index 4 }}{{ $itemClass = "gallery-item tall-4" }}{{ end }}
-        {{ else if eq $gallery3Class "gallery-compact" }}
+        {{ if eq $gallery3Class "gallery-compact" }}
           {{ if eq $index 0 }}{{ $itemClass = "gallery-item wide" }}{{ end }}
           {{ if eq $index 1 }}{{ $itemClass = "gallery-item small-1" }}{{ end }}
           {{ if eq $index 2 }}{{ $itemClass = "gallery-item small-2" }}{{ end }}
@@ -137,6 +126,13 @@
         </div>
         {{ end }}
         {{ end }}
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ if not .Params.content_part1 }}
+    <div class="project-content text-left">
+        {{ .Content }}
     </div>
     {{ end }}
 
